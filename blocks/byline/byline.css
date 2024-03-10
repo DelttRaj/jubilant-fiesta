@@ -1,0 +1,22 @@
+.cmp-byline .cmp-byline__image {
+  float: left;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px; /* $imageSize / 2 calculated */
+  object-fit: cover;
+}
+
+.cmp-byline .cmp-byline__name {
+  font-size: 16px; /* Assuming $font-size-medium */
+  padding-top: 0.5rem;
+  margin-left: 85px; /* $imageSize + 25px calculated */
+  margin-bottom: 0.25rem;
+  margin-top: 0rem;
+}
+
+.cmp-byline .cmp-byline__occupations {
+  margin-left: 85px; /* $imageSize + 25px calculated */
+  color: #808080; /* Assuming $gray */
+  font-size: 12px; /* Assuming $font-size-xsmall */
+  text-transform: uppercase;
+}
