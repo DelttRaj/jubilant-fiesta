@@ -11,6 +11,7 @@ import {
   waitForLCP,
   loadBlocks,
   loadCSS,
+  loadScript,
 } from "./aem.js";
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -135,6 +136,17 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+}
+
+/**
+ * Loads the Vue JS Library in Component Block with loadScript
+ */
+export async function loadVueJS() {
+  try {
+    await loadScript("https://unpkg.com/vue@3/dist/vue.global.js");
+  } catch (error) {
+    console.log("Error loading Vue JS ", error);
+  }
 }
 
 loadPage();

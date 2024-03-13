@@ -1,4 +1,4 @@
-import { createApp, ref } from "vue";
+import { loadVueJS } from "../../scripts/scripts.js";
 const templateUrl = "blocks/byline/template.html";
 
 //Extract the Block Information for Byline Custom Block
@@ -21,7 +21,7 @@ function extractBlockInformation(block) {
   // Prioritize the source tag with type="image/webp" and media="(min-width: 600px)"
   const pictureElement = block.querySelector("picture");
   const sourceWebP = pictureElement.querySelector(
-    'source[type="image/webp"][media="(min-width: 600px)"]',
+    'source[type="image/webp"][media="(min-width: 600px)"]'
   );
   const imgElement = pictureElement.querySelector("img");
   if (sourceWebP) {
@@ -34,14 +34,17 @@ function extractBlockInformation(block) {
 }
 //function to create Byline with help of Vue JS -> CreateApp
 function createByline(html, blockData, bylineComponentWrapper) {
-  createApp({
-    setup() {
-      const data = ref(blockData);
-      console.log("Information in data ", data);
-      return { data };
-    },
-    template: html,
-  }).mount(bylineComponentWrapper);
+  loadVueJS().then(() => {
+    const { createApp, ref } = Vue;
+    createApp({
+      setup() {
+        const data = ref(blockData);
+        console.log("Information in data ", data);
+        return { data };
+      },
+      template: html,
+    }).mount(bylineComponentWrapper);
+  });
 }
 //The default main/decorate function to do the icing :)
 export default function decorate(block) {
