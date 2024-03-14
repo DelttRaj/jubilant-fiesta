@@ -148,5 +148,24 @@ export async function loadVueJS() {
     console.log("Error loading Vue JS ", error);
   }
 }
+/**
+ *
+ */
+export function createVueBlock(
+  templateString,
+  templateBlock = {},
+  blockwrapper = document.createElement("div")
+) {
+  loadVueJS().then(() => {
+    const { createApp, ref } = Vue;
+    createApp({
+      setup() {
+        const data = ref(templateBlock);
+        return { data };
+      },
+      template: templateString,
+    }).mount(blockwrapper);
+  });
+}
 
 loadPage();
