@@ -1,8 +1,7 @@
-import { loadVueJS } from "../../scripts/scripts.js";
 import { createVueBlock } from "../../scripts/scripts.js";
 const templateUrl = "blocks/byline/template.html";
 
-//Extract the Block Information for Byline Custom Block
+// Extract the Block Information for Byline Custom Block
 function extractBlockInformation(block) {
   // Initialize the object to hold the extracted information
   const blockInfo = {
@@ -34,7 +33,8 @@ function extractBlockInformation(block) {
   return blockInfo;
 }
 
-//The default main/decorate function to do the icing :)
+// The default main/decorate function to do the icing :)
+
 export default function decorate(block) {
   const blockData = extractBlockInformation(block);
   const bylineComponentWrapper = document.createElement("div");
