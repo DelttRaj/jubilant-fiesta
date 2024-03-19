@@ -12,12 +12,15 @@
 
 :root {
   /* colors */
-  --link-color: #bbe2ec;
-  --link-hover-color: #40a2e3;
+  --link-color: #c31a1a;
+  --link-hover-color: #c31a1a;
   --background-color: #fff6e9;
   --light-color: #fff6e9;
   --dark-color: #0d9276;
   --text-color: black;
+
+  --primary-color: #b1454a;
+  --secondary-color: #121212;
 
   /* fonts */
   --body-font-family: Oxygen;
@@ -145,7 +148,7 @@ main pre {
 
 /* links */
 a:any-link {
-  color: var(--link-color);
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -215,10 +218,6 @@ main img {
 }
 
 /* sections */
-main .section {
-  padding: 64px 16px;
-}
-
 @media (width >= 600px) {
   main .section {
     padding: 64px 32px;

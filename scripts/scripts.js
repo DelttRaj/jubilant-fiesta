@@ -141,15 +141,38 @@ async function loadPage() {
 /**
  * Loads the Vue JS Library in Component Block with loadScript
  */
+let loadPromise = null; // Cache the promise
 export async function loadVueJS() {
+  if (loadPromise) {
+    return loadPromise; // Return the existing promise if script is already being loaded
+  }
+
+  loadPromise = new Promise(async (resolve, reject) => {
+    try {
+      await loadScript("https://unpkg.com/vue@3/dist/vue.global.js");
+      resolve(); // Resolve when the script is successfully loaded
+    } catch (error) {
+      console.log("Error loading Vue JS ", error);
+      reject(error); // Reject the promise on error
+    }
+  });
+
+  return loadPromise; // Return the new promise
+}
+
+/**
+ * Load Jquery
+ */
+export async function loadJquery() {
   try {
-    await loadScript("https://unpkg.com/vue@3/dist/vue.global.js");
+    await loadScript("https://code.jquery.com/jquery-3.7.1.slim.min.js");
   } catch (error) {
-    console.log("Error loading Vue JS ", error);
+    console.log("Error loading Jquery ", error);
   }
 }
+
 /**
- *
+ * Create the vue block !!
  */
 export function createVueBlock(
   templateString,

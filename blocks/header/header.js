@@ -1,5 +1,6 @@
-import { getMetadata, loadScript } from "../../scripts/aem.js";
+import { getMetadata } from "../../scripts/aem.js";
 import { loadFragment } from "../fragment/fragment.js";
+import { loadJquery } from "../../scripts/scripts.js";
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia("(min-width: 900px)");
 
@@ -103,29 +104,44 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata("nav");
-  const navPath = navMeta ? new URL(navMeta).pathname : "/nav";
-  const fragment = await loadFragment(navPath);
-  console.log("Information about fragment ", fragment);
-  // decorate nav DOM
-  const nav = document.createElement("nav");
-  nav.className = "header__nav";
+  loadJquery().then(async () => {
+    // load nav as fragment
+    const navMeta = getMetadata("nav");
+    const navPath = navMeta ? new URL(navMeta).pathname : "/nav";
+    const fragment = await loadFragment(navPath);
+    console.log("Information about fragment ", fragment);
+    // decorate nav DOM
+    const nav = document.createElement("nav");
+    nav.className = "header__nav";
 
-  const headerLogo = document.createElement("div");
-  headerLogo.className = "header__logo";
-  const headerTitle = fragment.querySelector(
-    ".default-content-wrapper"
-  ).innerText;
-  const headerTitleContent = document.createElement("h4");
-  headerTitleContent.innerText = headerTitle;
+    const headerLogo = document.createElement("div");
+    headerLogo.className = "header__logo";
+    const headerTitle = fragment.querySelector(
+      ".default-content-wrapper"
+    ).innerText;
+    const headerTitleContent = document.createElement("h4");
+    headerTitleContent.innerText = headerTitle;
 
-  const headerTitleOverlay = document.createElement("div");
-  headerTitleOverlay.className = "header__logo-overlay";
-  headerLogo.appendChild(headerTitleContent);
-  headerLogo.appendChild(headerTitleOverlay);
+    const headerTitleOverlay = document.createElement("div");
+    headerTitleOverlay.className = "header__logo-overlay";
+    headerLogo.appendChild(headerTitleContent);
+    headerLogo.appendChild(headerTitleOverlay);
 
-  console.log("The function is ", $);
-  nav.append(headerLogo);
-  block.append(nav);
+    const menuList = $(fragment)
+      .find(":nth-child(2)")
+      .find("ul")
+      .addClass("header__menu")
+      .get()[0];
+
+    const mobileMenu = document.createElement("ul");
+    const listItem = document.createElement("li");
+    mobileMenu.className = "header__menu-mobile";
+    mobileMenu.appendChild(listItem);
+    //TODO : We need to add the image for mobile menu
+
+    nav.append(headerLogo);
+    nav.appendChild(menuList);
+    nav.appendChild(mobileMenu);
+    block.append(nav);
+  });
 }
