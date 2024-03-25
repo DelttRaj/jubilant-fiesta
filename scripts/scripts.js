@@ -13,7 +13,7 @@ import {
   loadCSS,
   loadScript,
 } from "./aem.js";
-
+import { createApp, ref } from "vue";
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
 /**
@@ -179,16 +179,13 @@ export function createVueBlock(
   templateBlock = {},
   blockwrapper = document.createElement("div")
 ) {
-  loadVueJS().then(() => {
-    const { createApp, ref } = Vue;
-    createApp({
-      setup() {
-        const data = ref(templateBlock);
-        return { data };
-      },
-      template: templateString,
-    }).mount(blockwrapper);
-  });
+  createApp({
+    setup() {
+      const data = ref(templateBlock);
+      return { data };
+    },
+    template: templateString,
+  }).mount(blockwrapper);
 }
 
 loadPage();

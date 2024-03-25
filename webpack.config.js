@@ -1,8 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
-module.exports = {
+const { defineConfig } = require("@vue/cli-service");
+module.exports = defineConfig({
   mode: "production",
   entry: [
     path.resolve(__dirname, "scripts/aem.js"),
@@ -35,6 +37,10 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+      },
     ],
   },
   plugins: [
@@ -58,11 +64,16 @@ module.exports = {
         },
       },
     }),
+    new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: "false",
+    }),
   ],
   resolve: {
     alias: {
       "@blocks": path.resolve(__dirname, "blocks"),
+      vue: "vue/dist/vue.esm-bundler.js",
     },
   },
-};
+});
 console.log("Info about module ", module.rules);
