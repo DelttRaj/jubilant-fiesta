@@ -1,5 +1,6 @@
 <template>
-  <h4 v-for="fact in facts">{{ fact }}</h4>
+  <h5>Some Interesting Sushi Facts :</h5>
+  <h6 v-for="fact in facts">{{ fact }}</h6>
 </template>
 <script>
 import { toRefs } from "vue";
