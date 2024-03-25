@@ -76,4 +76,3 @@ module.exports = defineConfig({
     },
   },
 });
-console.log("Info about module ", module.rules);
