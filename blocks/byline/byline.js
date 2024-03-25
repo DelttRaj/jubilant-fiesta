@@ -38,7 +38,6 @@ function extractBlockInformation(block) {
 export default function decorate(block) {
   const blockData = extractBlockInformation(block);
   const bylineComponentWrapper = document.createElement("div");
-
   fetch(templateUrl)
     .then((response) => response.text())
     .then((html) => {
