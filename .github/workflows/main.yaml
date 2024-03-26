@@ -12,4 +12,4 @@ jobs:
           node-version: 20
       - run: npm ci
       - name: Build with Webpack
-        run: npm run build
+        run: npm run build:prod

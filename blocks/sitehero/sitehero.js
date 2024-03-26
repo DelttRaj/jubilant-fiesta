@@ -1,4 +1,6 @@
 import { createVueBlock } from "../../scripts/scripts.js";
+import { createApp } from "vue";
+import SiteHero from "./SiteHero.vue";
 const templateUrl = "blocks/sitehero/template.html";
 
 function extractBlockInformation(block) {
@@ -35,7 +37,7 @@ function extractBlockInformation(block) {
   blockInfo.ctaOrderNow = block
     .querySelector("div div:nth-child(3) > div")
     .textContent.trim();
- return blockInfo;
+  return blockInfo;
 }
 export default function decorate(block) {
   const blockData = extractBlockInformation(block);
@@ -43,11 +45,9 @@ export default function decorate(block) {
   const heroSection = document.createElement("section");
   heroSection.className = "hero";
 
-  fetch(templateUrl)
-    .then((response) => response.text())
-    .then((html) => {
-      createVueBlock(html, blockData, heroSection); // Creating a side-effect to the bylineComponentWrapper
-    });
+  createApp(SiteHero, {
+    data: blockData,
+  }).mount(heroSection);
 
   block.textContent = "";
   block.append(heroSection);

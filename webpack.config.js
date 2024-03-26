@@ -5,7 +5,7 @@ const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  mode: "production",
+  context: __dirname,
   entry: [
     path.resolve(__dirname, "scripts/aem.js"),
     path.resolve(__dirname, "scripts/delayed.js"),
@@ -34,7 +34,7 @@ module.exports = defineConfig({
         },
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
       {
