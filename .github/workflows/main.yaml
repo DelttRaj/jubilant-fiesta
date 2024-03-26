@@ -23,3 +23,6 @@ jobs:
           git add build/
           git commit -m "Automatically generated build files"
           git push
+      - name: Sparse Checkout
+        run: |
+          git sparse-checkout set '*' '!build/bundle.js'
