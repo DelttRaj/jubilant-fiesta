@@ -5,6 +5,7 @@ const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
+  mode: "production",
   context: __dirname,
   entry: [
     path.resolve(__dirname, "scripts/aem.js"),

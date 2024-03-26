@@ -15,16 +15,4 @@ jobs:
           node-version: 20
       - run: npm ci
       - name: Build with Webpack
-        run: npm run build:prod
-      - name: Commit and Push Build Directory
-        run: |
-          git config --global user.email "raj.roy@pwc.com"
-          git config --global user.name "RDevRoy"
-          git add build/bundle.js -f
-          # Check if there are any changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes in build/bundle.js to commit."
-          else
-            git commit -m "Automatically generated build files"
-            git push
-          fi
+        run: npm run build
