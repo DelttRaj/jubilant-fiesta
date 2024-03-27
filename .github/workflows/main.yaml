@@ -17,14 +17,6 @@ jobs:
         run: |
           npm install --dry-run
           git diff --exit-code package-lock.json # This fails if package-lock.json is modified
-      - name: Install dependencies
-        run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
+      - run: npm i
       - name: Build with Webpack
         run: npm run build
