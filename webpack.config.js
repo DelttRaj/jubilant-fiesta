@@ -82,7 +82,6 @@ module.exports = defineConfig({
     new InjectManifest({
       swSrc: "./scripts/serviceworker/src-sw.js",
       swDest: "sw.js",
-      exclude: [/head\.html$/],
     }),
   ],
   resolve: {
