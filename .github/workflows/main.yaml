@@ -13,6 +13,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Check if package.json and package-lock.json are in sync
+        run: |
+          npm install --dry-run
+          git diff --exit-code package-lock.json # This fails if package-lock.json is modified
       - run: npm ci
       - name: Build with Webpack
         run: npm run build
