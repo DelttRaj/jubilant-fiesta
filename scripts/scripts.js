@@ -13,6 +13,7 @@ import {
   loadCSS,
   loadScript,
 } from "./aem.js";
+import registerServiceWorker from "./serviceworker/serviceWorkerRegistration.js";
 import { createApp, ref } from "vue";
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 
@@ -189,3 +190,4 @@ export function createVueBlock(
 }
 
 loadPage();
+registerServiceWorker();
